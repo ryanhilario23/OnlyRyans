@@ -1,0 +1,27 @@
+onlyRyans Site
+
+Name: Ryan Hilario
+Stack: Python
+Github Repo Link: //link
+Project Name: onlyRyans social media Platform
+Project Description:
+    OnlyRyans would be a social media platform that are exclusely for Ryans and phonetically name in the name of Ryan.
+    This would be project that can support with the Ryan Meet Up organization to have a database of Ryans to achieve
+        their mission goal; Beating the Gunniess World Record: Largest Same Name gathering (first name only).
+        With the record of the name Ivan with 2325 Ivans.
+    A platform for Ryans to network and see where other Ryans live
+MVP
+Minimum Viable Product features:
+    Registration validations that would only accept their first name of Ryan or approved listed of phonetic names of Ryan
+        Ongoing joke: Reject and flash a special messages with the names of Bryan
+    Ryan's are able to Create, edit, Delete their posting about their lives
+    Replicating Ryanmeetup.com styling for easier intergration
+    Protection for non-Ryan clients to gain access their account
+
+
+Bonus features:
+    Ryan users, are able to upload thier photos for their profile pictures
+    Have Ryan admins that can review the Ryan's
+    Additional features I want to add:
+        Ryan's can upload their media along with their posting
+        Create a page for events that Ryan can RSVP (Many to many relationship)
