@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ryan Log In</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+</head>
+
+<body class="mx-auto">
+    <p>Who the hell is Patrick, anyway? Join us for St. Ryan's Day in Chicago IL, on March 23<sup>rd</sup></p>
+    <header class="d-flex">
+        <div class="d-flex">
+                <h4 id="logo">RYAN</h4>
+                <p>Events</p>
+                <p>Merch</p>
+                <p>Poster</p>
+                <p>Gallery</p>
+                <p>Posters</p>
+                <p>Map</p>
+                <p>Press</p>
+                <p>Support</p>
+                <p>Contact</p>
+                <img id="iconLinks" src="static/icons/instagram_icon.png" alt="instagram Ryan MeetUp">
+                <img id="iconLinks" src="static/icons/meetup_icon.png" alt="Ryan Meetup Link">
+                <img id="iconLinks" src="static/icons/discord_icon.png" alt="Ryan Discord">
+            </div>
+        <button class="login-b"><a class="login-b" href="/">OnlyRyans</a></button>
+    </header>
+    
+    <main class="d-flex">
+        <div class="box">
+            <h4>Ryan Register</h4>
+            <h6>No Brians</h6>
+            <form action="" methods="POST">
+                <label for="">First Name: </label><br>
+                <input type="text" name="first_name"><br>
+                <label for="">Last Name: </label><br>
+                <input type="text" name="last_name"><br>
+                <label for="">Email: </label><br>
+                <input type="text" name="email"><br>
+                <label for="">Password: </label><br>
+                <input type="text" name="password"><br>
+                <label for="">Password Checker</label><br>
+                <input type="text" name="password_check"><br><br>
+                <input type="submit" value="Log in Ryan">
+            </form>
+            <a href="/register_ryan">Register your Ryan name</a>
+        </div>
+        <div class="box">
+            <h4>Log In</h4>
+            <form action="">
+                <label for="">Email: </label><br>
+                <input type="text" name="email"><br>
+                <label for="">Password: </label><br>
+                <input type="text" name="password"><br>
+                <br>
+                <input type="submit" value="Register Ryan">
+            </form>
+        </div>
+
+    </main>
+</body>
+
+</html>
