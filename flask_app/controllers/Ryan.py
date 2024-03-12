@@ -9,17 +9,46 @@ bcrypt = Bcrypt(app)
 def only_ryans_home():
     return render_template('index.html')
 
+@app.route('/register_ryan/push', methods=['POST'])
+def save_ryan():
+    form = request.form
+    # Need to communicate with DB to check the list for valid Ryan names
+    if Ryan.brian_check(form):
+        return redirect('/')
+    if not Ryan.validate_register(form):
+        return redirect('/')
+    
+    pw_has = bcrypt.generate_password_hash(form['password'])
+    
+    register_data = {
+        'ryan_name': form['ryan_name'],
+        'last_name': form['last_name'],
+        'email': form['email'],
+        'password': pw_has
+    }
+    id = Ryan.save_ryan(register_data)
+    session['user_id'] = id
+    return redirect ('/dashboard')
+
+@app.route('/dashboard')
+def onlyRyans_home():
+    if not session['user_id']:
+        return redirect('/')
+    return render_template('dashboard.html')
+
+
+
+
 
 # Log in routes
 @app.route('/loginryan/push', methods=['POST'])
 def login_ryan():
-    if Ryan.validate_login(request.form):
+    if not Ryan.validate_login(request.form):
             return redirect('/')
     
     form = request.form
     login_info = {
-        'email': form['email'],
-        'password': form['password'] 
+        'email': form['email']
     }
     account = Ryan.login_ryan(login_info)
     if not account:
@@ -33,7 +62,7 @@ def login_ryan():
         return redirect('/')
     
     session['user_id'] = account['user_id']
-    return  redirect('/dashboard')
+    return redirect('/dashboard')
 
 @app.route('/dashboard')
 def logged_in_ryan():
@@ -49,17 +78,18 @@ def logged_in_ryan():
 def jump_ryan():
     return render_template('registerRyan.html')
 
-@app.route('/register_ryan/push', methods=['POST'])
+@app.route('/register_ryan_name/push', methods=['POST'])
 def register_ryan():
     form = request.form
-    if not Ryan.validate_name(form):
-        return redirect('/register_ryan')
-    if not Ryan.brian_check(form):
-        return redirect('/register_ryan')
-    
     data ={
         'name': form['ryan_name'],
         'email': form['email']
     }
+
+    if not Ryan.validate_name(data):
+        return redirect('/register_ryan')
+    if Ryan.brian_check(data):
+        return redirect('/register_ryan')
+    
     Ryan.submit_ryan_entry(data)
     flash('Your Ryan name has been submitted.', 'ryan_register')

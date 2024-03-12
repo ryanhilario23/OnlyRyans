@@ -34,31 +34,42 @@
     <main class="d-flex">
         <div class="box">
             <h4>Ryan Register</h4>
-            <h6>No Brians</h6>
-            <form action="" methods="POST">
+            {% with messages = get_flashed_messages(category_filter=["register"]) %}{%if messages %}
+            {%for message in messages%}
+            <p><strong>{{message}}</strong></p>
+            {%endfor%}
+            {%endif%}
+            {%endwith%}
+            <form action="/register_ryan/push" method="POST">
                 <label for="">First Name: </label><br>
-                <input type="text" name="first_name"><br>
+                <input type="text" name="ryan_name"><br>
                 <label for="">Last Name: </label><br>
                 <input type="text" name="last_name"><br>
                 <label for="">Email: </label><br>
                 <input type="text" name="email"><br>
                 <label for="">Password: </label><br>
-                <input type="text" name="password"><br>
+                <input type="password" name="password"><br>
                 <label for="">Password Checker</label><br>
-                <input type="text" name="password_check"><br><br>
-                <input type="submit" value="Log in Ryan">
+                <input type="password" name="password_check"><br><br>
+                <input type="submit" value="Register Ryan">
             </form>
             <a href="/register_ryan">Register your Ryan name</a>
         </div>
         <div class="box">
             <h4>Log In</h4>
-            <form action="">
+            {% with messages = get_flashed_messages(category_filter=["login"]) %}{%if messages %}
+            {%for message in messages%}
+            <p><strong>{{message}}</strong></p>
+            {%endfor%}
+            {%endif%}
+            {%endwith%}
+            <form action="/loginryan/push" method = 'POST'>
                 <label for="">Email: </label><br>
                 <input type="text" name="email"><br>
                 <label for="">Password: </label><br>
-                <input type="text" name="password"><br>
+                <input type="password" name="password"><br>
                 <br>
-                <input type="submit" value="Register Ryan">
+                <input type="submit" value="Log in Ryan">
             </form>
         </div>
 
