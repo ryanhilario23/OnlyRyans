@@ -31,5 +31,5 @@ You need to finalized the erd to start saving the data. This requires having a t
 
 3/11/24
 You are able to have the flash message running and the Registration and Log in working
-Now we need to inplment the Ryan validation table to the Registration
+~~Now we need to inplment the Ryan validation table to the Registration
 Continue designing the designing the users UI

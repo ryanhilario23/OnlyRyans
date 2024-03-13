@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ryan - Profile</title>
+    <title>{{session['full_name']}} - Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 </head>
 <body>
 <header>
     <a href="">Home</a>
     <a href="">Logout</a>
 </header>
-<h4>Ryan Hilario</h4>
-<a href="">Add your social media</a>
+<h4>{{session['full_name']}}</h4>
+<a href="socialmedia.html">Add your social media</a>
 
 
 <p>Ryan has posted: XXX</p>

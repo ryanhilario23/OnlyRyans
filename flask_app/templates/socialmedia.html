@@ -10,8 +10,8 @@
 </head>
 <body>
     <header>
-        <a href="">Home</a>
-        <a href="">Logout</a>
+        <a href="/dashboard">Home</a>
+        <a href="/logout">Logout</a>
     </header>
     <h3>add your account</h3>
     <p>In development on adding more accounts</p>
@@ -24,7 +24,10 @@
         <input type="text"> <br>
         <label for="">Twitter / X:</label><br>
         <input type="text"> <br>
-        <br><input type="submit" value="Save Accounts">
+        <input type="hidden" value = "{{session['user_id']}}">
+        <br>
+        <button  href="/profile{{session['user_id']}}">Cancel</button>
+        <input type="submit" value="Save Accounts">
     </form>
 </body>
 </html>

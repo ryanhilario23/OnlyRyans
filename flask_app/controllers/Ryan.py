@@ -12,10 +12,13 @@ def only_ryans_home():
 @app.route('/register_ryan/push', methods=['POST'])
 def save_ryan():
     form = request.form
-    # Need to communicate with DB to check the list for valid Ryan names
     if Ryan.brian_check(form):
         return redirect('/')
     if not Ryan.validate_register(form):
+        return redirect('/')
+    if not Ryan.ryan_name_check(form):
+        return redirect('/')
+    if Ryan.registered_ryan(form):
         return redirect('/')
     
     pw_has = bcrypt.generate_password_hash(form['password'])
@@ -34,10 +37,16 @@ def save_ryan():
 def onlyRyans_home():
     if not session['user_id']:
         return redirect('/')
-    return render_template('dashboard.html')
+    id = session['user_id']
+    user = Ryan.get_user(id)
+    session['full_name'] = user['first_name'] +' '+ user['last_name']
+    print(session['full_name'])
+    return render_template('dashboard.html',ryan=user)
 
-
-
+@app.route('/profile/<int:user_id>')
+def jump_to_profile(user_id):
+    user = Ryan.get_user(user_id)
+    return render_template('profile.html',ryan=user)
 
 
 # Log in routes
@@ -93,3 +102,9 @@ def register_ryan():
     
     Ryan.submit_ryan_entry(data)
     flash('Your Ryan name has been submitted.', 'ryan_register')
+
+
+@app.route('/logout')
+def login_out():
+    session.clear()
+    return redirect('/')

@@ -8,6 +8,11 @@ body{
     max-width: 80%;
 }
 
+header{
+    background-color: green;
+}
+
+
 #logo{
     font-family: 'cooper black';
 }

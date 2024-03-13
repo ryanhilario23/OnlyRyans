@@ -18,7 +18,6 @@ class Ryan:
 
     @classmethod
     def login_ryan(cls,data):
-
         query = """
                 SELECT *
                 FROM users
@@ -27,7 +26,20 @@ class Ryan:
         results = connectToMySQL(cls.DB).query_db(query,data)
         print(results)
         return results[0]
-    
+
+    @classmethod
+    def get_user(cls,data):
+        query = """ 
+                SELECT *
+                FROM users
+                WHERE user_id = %(user_id)s
+                """
+        user = {'user_id': data}
+        results = connectToMySQL(cls.DB).query_db(query,user)
+        return results[0]
+
+
+# Save data to DB 
     @classmethod
     def save_ryan(cls,data):
         query = """
@@ -46,8 +58,7 @@ class Ryan:
         results = connectToMySQL(cls.DB).query_db(query,data)
         return results
     
-
-    # No Brian Checks
+# No Brian checks
     @classmethod
     def brian_check(cls,data):
         query = """
@@ -62,6 +73,38 @@ class Ryan:
             flash('No Brians allowed.', 'ryan_register')
             flash('No Brians allowed.', 'register')
         return results
+    
+# Valid Ryan check
+    @classmethod
+    def ryan_name_check(cls,data):
+        print('ryancheck')
+        query = """
+                SELECT name
+                FROM ryans
+                WHERE name = %(ryan_name)s
+                LIMIT 1;
+                """
+        results = connectToMySQL(cls.DB).query_db(query,data)
+        if results == 1:
+            flash('Valid Ryan names only. Register your ryan name to validate','register')
+        return results
+    
+# Check for email already registered
+    @classmethod
+    def registered_ryan(cls,data):
+        print('emailcheck')
+        query = """
+                SELECT email
+                FROM users
+                WHERE email = %(email)s
+                LIMIT 1; 
+                """
+        results = connectToMySQL(cls.DB).query_db(query,data)
+        print('here',results)
+        if results:
+            flash('email already taken','register')
+        return results
+
 
 #Static Methods
     @staticmethod
