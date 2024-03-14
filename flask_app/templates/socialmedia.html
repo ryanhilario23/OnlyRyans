@@ -15,19 +15,23 @@
     </header>
     <h3>add your account</h3>
     <p>In development on adding more accounts</p>
-    <form action="">
+    <form action="/account/push" method="POST">
         <label for="">Facebook:</label><br>
-        <input type="text"> <br>
+        <input type="hidden" name='user_id' value= "{{session['user_id']}}">
+        <input type="text" name="facebook" value="{{accounts.facebook}}"> <br>
         <label for="">Instagram:</label><br>
-        <input type="text"> <br>
+        <input type="text" name="instagram" value="{{accounts.instagram}}"> <br>
         <label for="">Snapchat:</label><br>
-        <input type="text"> <br>
+        <input type="text" name="snapchat"  value="{{accounts.snapchat}}"> <br>
         <label for="">Twitter / X:</label><br>
-        <input type="text"> <br>
-        <input type="hidden" value = "{{session['user_id']}}">
+        <input type="text" name="twitter" value="{{accounts.twitter}}"> <br>
         <br>
-        <button  href="/profile{{session['user_id']}}">Cancel</button>
-        <input type="submit" value="Save Accounts">
+        <button href="/profile">Cancel</button>
+        {%if accounts%}
+        <input type="submit" name='action' value="Update">
+        {%else%}
+        <input type="submit" name='action' value="Save">
+        {% endif %}
     </form>
 </body>
 </html>

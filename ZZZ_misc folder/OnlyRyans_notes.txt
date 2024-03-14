@@ -33,3 +33,8 @@ You need to finalized the erd to start saving the data. This requires having a t
 You are able to have the flash message running and the Registration and Log in working
 ~~Now we need to inplment the Ryan validation table to the Registration
 Continue designing the designing the users UI
+
+3/13/24
+Awesome progress Ryan. You have 80% completed with the profile page.
+Having the social media database formed and able to have showing in the page
+Finish up with the profile page and move on working on the posting

@@ -1,4 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.models.Accounts import Accounts
 from flask import flash
 import re
 
@@ -9,12 +10,12 @@ PASSWOR_REGEX = re.compile(r'a-zA-Z0-9.+_-')
 class Ryan:
     DB = 'onlyryans_schema'
     def __init__(self,data):
-        self.id = data['user_id'],
-        self.first_name = data['first_name'],
-        self.last_name = data['last_name'],
-        self.email = data['email'],
-        self.password = data['password'],
-        self.passowrd_c = data['password_c']
+        self.id = data['user_id']
+        self.first_name = data['first_name']
+        self.last_name = data['last_name']
+        self.email = data['email']
+        self.password = data['password']
+        self.ryan_account = []
 
     @classmethod
     def login_ryan(cls,data):
@@ -92,7 +93,6 @@ class Ryan:
 # Check for email already registered
     @classmethod
     def registered_ryan(cls,data):
-        print('emailcheck')
         query = """
                 SELECT email
                 FROM users
@@ -100,10 +100,35 @@ class Ryan:
                 LIMIT 1; 
                 """
         results = connectToMySQL(cls.DB).query_db(query,data)
-        print('here',results)
         if results:
             flash('email already taken','register')
         return results
+
+# Profile gathering
+    @classmethod
+    def ryan_details(cls,id):
+        query = """ 
+				SELECT *
+                FROM users
+                JOIN accounts ON accounts.user_id = users.user_id
+                WHERE users.user_id = %(user_id)s
+                """
+        data = {'user_id': id}
+        results = connectToMySQL(cls.DB).query_db(query,data)
+        print(results[0])
+        account = cls(results[0])
+        for details in results:
+            account_details = {
+                'user_id': details['user_id'],
+                'first_name': details['first_name'],
+                'last_name': details['last_name'],
+                'facebook': details['facebook'],
+                'instagram': details['instagram'],
+                'twitter': details['twitter'],
+                'snapchat': details['snapchat'],
+            }
+        account.ryan_account.append(Accounts(account_details))
+        return results[0]
 
 
 #Static Methods

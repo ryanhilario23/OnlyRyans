@@ -53,5 +53,22 @@
 --     FOREIGN KEY (user_id)
 --     REFERENCES users (user_id);
 
-SELECT *
-FROM ryans
+
+-- CREATE TABLE accounts
+-- (
+--   user_id   INT          NULL    ,
+--   facebook  VARCHAR(255) NULL    ,
+--   instagram VARCHAR(255) NULL    ,
+--   twitter   VARCHAR(255) NULL    ,
+--   snapchat  VARCHAR(255) NULL    
+-- );
+
+-- ALTER TABLE accounts
+--   ADD CONSTRAINT FK_users_TO_accounts
+--     FOREIGN KEY (user_id)
+--     REFERENCES users (user_id);
+
+				SELECT users.user_id, first_name, last_name, facebook, instagram, twitter, snapchat
+                FROM users
+                JOIN accounts ON accounts.user_id = users.user_id
+                WHERE users.user_id = 1

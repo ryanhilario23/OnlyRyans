@@ -43,11 +43,6 @@ def onlyRyans_home():
     print(session['full_name'])
     return render_template('dashboard.html',ryan=user)
 
-@app.route('/profile/<int:user_id>')
-def jump_to_profile(user_id):
-    user = Ryan.get_user(user_id)
-    return render_template('profile.html',ryan=user)
-
 
 # Log in routes
 @app.route('/loginryan/push', methods=['POST'])
