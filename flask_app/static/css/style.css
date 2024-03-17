@@ -45,3 +45,7 @@ body{
     background-color: #fefffa;
 
 }
+
+div{
+    border: black 1px solid;
+}

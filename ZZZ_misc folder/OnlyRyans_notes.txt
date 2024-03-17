@@ -38,3 +38,9 @@ Continue designing the designing the users UI
 Awesome progress Ryan. You have 80% completed with the profile page.
 Having the social media database formed and able to have showing in the page
 Finish up with the profile page and move on working on the posting
+
+3/17/24
+Lot has been added since the last udpate
+Ryan poll is 90% there
+Ryan posting is done
+Need to create the viewing of the post and create the profile

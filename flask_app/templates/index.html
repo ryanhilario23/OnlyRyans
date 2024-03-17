@@ -34,7 +34,8 @@
     <main class="d-flex">
         <div class="box">
             <h4>Ryan Register</h4>
-            {% with messages = get_flashed_messages(category_filter=["register"]) %}{%if messages %}
+            {% with messages = get_flashed_messages(category_filter=["register"]) %}
+            {%if messages %}
             {%for message in messages%}
             <p><strong>{{message}}</strong></p>
             {%endfor%}

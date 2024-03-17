@@ -30,7 +30,9 @@ def save_to_account():
         'twitter': form['twitter']
     }
     action = request.form.get('action')
-    if action == 'Update':
+    if action == 'Cancel':
+        return redirect('/profile')
+    elif action == 'Update':
         Accounts.update_accounts(data)
     elif action == 'Save':
         Accounts.save_accounts(data)

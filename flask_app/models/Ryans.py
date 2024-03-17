@@ -1,5 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.Accounts import Accounts
+from flask_app.models.Postings import Posting
 from flask import flash
 import re
 
@@ -16,6 +17,7 @@ class Ryan:
         self.email = data['email']
         self.password = data['password']
         self.ryan_account = []
+        self.ryan_posts =[]
 
     @classmethod
     def login_ryan(cls,data):
@@ -25,7 +27,9 @@ class Ryan:
                 WHERE email = %(email)s
                 """
         results = connectToMySQL(cls.DB).query_db(query,data)
-        print(results)
+        if results == ():
+            Ryan.invalid_account()
+            return
         return results[0]
 
     @classmethod
@@ -110,7 +114,7 @@ class Ryan:
         query = """ 
 				SELECT *
                 FROM users
-                JOIN accounts ON accounts.user_id = users.user_id
+                LEFT JOIN accounts ON accounts.user_id = users.user_id
                 WHERE users.user_id = %(user_id)s
                 """
         data = {'user_id': id}
@@ -130,6 +134,31 @@ class Ryan:
         account.ryan_account.append(Accounts(account_details))
         return results[0]
 
+
+
+    @classmethod
+    def show_all_post(cls):
+        query = """
+                SELECT postings.post_id,postings.post , COUNT(likes.user_id) as likes,users.user_id,users.first_name,users.last_name,users.email,users.password
+                FROM users
+				JOIN postings ON postings.user_id = users.user_id
+                JOIN likes on likes.post_id = postings.post_id
+                group by post_id;
+                """
+        results = connectToMySQL(cls.DB).query_db(query)
+        print(results)
+        post = cls(results[0])
+        for ryan in results:
+            ryans_post ={
+                'post_id': ryan['post_id'],
+                'post': ryan['post'],
+                'user_id': ryan['user_id'],
+                'first_name': ryan['first_name'],
+                'last_name': ryan['last_name'],
+                'likes': ryan['likes']
+            }
+        post.ryan_posts.append(Posting(ryans_post))
+        return results
 
 #Static Methods
     @staticmethod
@@ -169,7 +198,7 @@ class Ryan:
     
     @staticmethod
     def invalid_account():
-        flash('invalid email/password Ryan', 'login')
+        flash('invalid email/password', 'login')
         return
 
     @staticmethod 

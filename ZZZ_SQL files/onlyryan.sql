@@ -68,7 +68,44 @@
 --     FOREIGN KEY (user_id)
 --     REFERENCES users (user_id);
 
-				SELECT users.user_id, first_name, last_name, facebook, instagram, twitter, snapchat
-                FROM users
-                JOIN accounts ON accounts.user_id = users.user_id
-                WHERE users.user_id = 1
+-- CREATE TABLE entrys
+-- (
+--   entry_id INT          NOT NULL AUTO_INCREMENT,
+--   name     VARCHAR(255) NULL    ,
+--   email    VARCHAR(255) NULL    ,
+--   PRIMARY KEY (entry_id)
+-- );
+
+-- CREATE TABLE vote
+-- (
+--   entry_id INT        NOT NULL,
+--   vote     VARCHAR(5) NULL    ,
+--   user_id  INT        NOT NULL
+-- );
+-- ALTER TABLE vote
+--   ADD CONSTRAINT FK_users_TO_vote
+--     FOREIGN KEY (user_id)
+--     REFERENCES users (user_id);
+
+-- ALTER TABLE vote
+--   ADD CONSTRAINT FK_entrys_TO_vote
+--     FOREIGN KEY (entry_id)
+--     REFERENCES entrys (entry_id);
+
+CREATE TABLE likes
+(
+  user_id INT NOT NULL,
+  likes   INT NULL    ,
+  post_id INT NOT NULL
+);
+
+
+ALTER TABLE likes
+  ADD CONSTRAINT FK_users_TO_likes
+    FOREIGN KEY (user_id)
+    REFERENCES users (user_id);
+
+ALTER TABLE likes
+  ADD CONSTRAINT FK_postings_TO_likes
+    FOREIGN KEY (post_id)
+    REFERENCES postings (post_id);

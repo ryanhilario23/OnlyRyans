@@ -16,6 +16,16 @@ class Accounts:
         self.last_name = data['last_name']
 
 
+    @classmethod 
+    def create_account(cls,id):
+        query = """
+                INSERT INTO accounts (user_id, facebook, instagram, twitter,snapchat)
+                VALUES (%(user_id)s,'','','')
+                """
+        data = {'user_id': id}
+        results = connectToMySQL(cls.DB).query_db(query,data)
+        return results
+
     @classmethod
     def save_accounts (cls,data):
         query = """

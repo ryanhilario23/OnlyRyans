@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import render_template, redirect, request, session
 from flask_app.models.Ryans import Ryan
+from flask_app.models.Accounts import Accounts
 from flask import flash
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
@@ -30,18 +31,9 @@ def save_ryan():
         'password': pw_has
     }
     id = Ryan.save_ryan(register_data)
+    Accounts.create_account(id)
     session['user_id'] = id
     return redirect ('/dashboard')
-
-@app.route('/dashboard')
-def onlyRyans_home():
-    if not session['user_id']:
-        return redirect('/')
-    id = session['user_id']
-    user = Ryan.get_user(id)
-    session['full_name'] = user['first_name'] +' '+ user['last_name']
-    print(session['full_name'])
-    return render_template('dashboard.html',ryan=user)
 
 
 # Log in routes
@@ -66,38 +58,8 @@ def login_ryan():
         return redirect('/')
     
     session['user_id'] = account['user_id']
+    session['full_name'] = account['first_name'] +' '+ account['last_name']
     return redirect('/dashboard')
-
-@app.route('/dashboard')
-def logged_in_ryan():
-    if not session['user_id']:
-        return redirect('/')
-
-
-
-
-
-#Register the Ryan name
-@app.route('/register_ryan')
-def jump_ryan():
-    return render_template('registerRyan.html')
-
-@app.route('/register_ryan_name/push', methods=['POST'])
-def register_ryan():
-    form = request.form
-    data ={
-        'name': form['ryan_name'],
-        'email': form['email']
-    }
-
-    if not Ryan.validate_name(data):
-        return redirect('/register_ryan')
-    if Ryan.brian_check(data):
-        return redirect('/register_ryan')
-    
-    Ryan.submit_ryan_entry(data)
-    flash('Your Ryan name has been submitted.', 'ryan_register')
-
 
 @app.route('/logout')
 def login_out():
