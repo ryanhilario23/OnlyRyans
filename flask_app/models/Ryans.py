@@ -18,6 +18,7 @@ class Ryan:
         self.password = data['password']
         self.ryan_account = []
         self.ryan_posts =[]
+        self.table = []
 
     @classmethod
     def login_ryan(cls,data):
@@ -112,10 +113,15 @@ class Ryan:
     @classmethod
     def ryan_details(cls,id):
         query = """ 
-				SELECT *
+                SELECT users.user_id, users.first_name,users.last_name,users.email,users.password, accounts.facebook, accounts.instagram, accounts.snapchat, accounts.twitter,                 
+                COUNT(DISTINCT postings.post_id) AS posts,
+                COUNT(DISTINCT likes.likes_id) AS likes
                 FROM users
-                LEFT JOIN accounts ON accounts.user_id = users.user_id
+                LEFT JOIN accounts ON users.user_id = accounts.user_id
+                LEFT JOIN postings ON users.user_id = postings.user_id
+                LEFT JOIN likes ON users.user_id = likes.user_id
                 WHERE users.user_id = %(user_id)s
+                GROUP BY users.user_id, users.first_name, accounts.facebook, accounts.instagram, accounts.snapchat, accounts.twitter;
                 """
         data = {'user_id': id}
         results = connectToMySQL(cls.DB).query_db(query,data)
@@ -141,8 +147,8 @@ class Ryan:
         query = """
                 SELECT postings.post_id,postings.post , COUNT(likes.user_id) as likes,users.user_id,users.first_name,users.last_name,users.email,users.password
                 FROM users
-				JOIN postings ON postings.user_id = users.user_id
-                JOIN likes on likes.post_id = postings.post_id
+				RIGHT JOIN postings ON postings.user_id = users.user_id
+                LEFT JOIN likes on likes.post_id = postings.post_id
                 group by post_id;
                 """
         results = connectToMySQL(cls.DB).query_db(query)
@@ -159,6 +165,22 @@ class Ryan:
             }
         post.ryan_posts.append(Posting(ryans_post))
         return results
+    
+
+    @classmethod
+    def who_likes_this(cls,post_id):
+        query = """ 
+                SELECT users.user_id,users.first_name, users.last_name, COUNT(likes.user_id) AS like_count
+                FROM postings
+                LEFT JOIN likes ON likes.post_id = postings.post_id
+                LEFT JOIN users ON likes.user_id = users.user_id
+                WHERE postings.post_id = %(post_id)s
+                GROUP BY users.user_id, users.first_name, users.last_name;
+                """
+        data = {'post_id': post_id}
+        results = connectToMySQL(cls.DB).query_db(query,data)
+        return results
+
 
 #Static Methods
     @staticmethod

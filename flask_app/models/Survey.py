@@ -24,11 +24,14 @@ class Survey:
     @classmethod
     def view_all_entry(cls):
         query = """ 
-                SELECT entry_id, name
-                FROM entrys
+                SELECT name, entrys.entry_id,
+                COUNT(CASE WHEN vote = 'Yes' THEN 1 END) AS 'yes',
+                COUNT(CASE WHEN vote = 'No' THEN 1 END) AS 'no'
+                FROM vote
+                LEFT JOIN entrys ON entrys.entry_id = vote.entry_id
+                GROUP BY name,entrys.entry_id
                 """
         results = connectToMySQL(cls.DB).query_db(query)
-        print(results)
         return results
 
 # user casting a vote
@@ -36,9 +39,9 @@ class Survey:
     def submit_vote(cls,data):
         query = """ 
                 INSERT INTO vote (entry_id,vote,user_id)
-                VALUES (%(entry_id)s,%(vote)s,%(user_id)s,)
+                VALUES (%(entry_id)s,%(vote)s,%(user_id)s)
                 """
-        results = connectToMySQL(cls.DB).query_db(query)
+        results = connectToMySQL(cls.DB).query_db(query,data)
         return results
     
 # See the votes casted

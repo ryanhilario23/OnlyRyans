@@ -34,14 +34,14 @@
                 {%if ryans%}
                 {%for ryan in ryans%}
                 <div class="d-flex">
-                    <a href="">{{ryan.first_name}}{{ryan.last_name}}: </a>
+                    <a href="/view/{{ryan.user_id}}">{{ryan.first_name}} {{ryan.last_name}}: </a>
                     <div>
 
                     <p>{{ryan.post}}</p>
-                    <a href="/likes/{{ryan.post_id}}">{{ryan.likes}} Likes</a> |
+                    <a href="/view_post/{{ryan.post_id}}">{{ryan.likes}} Ryans like this</a> |
                     <a href="/likes_{{ryan.post_id}}">Like this</a>
                     {%if ryan.user_id == session['user_id']%}
-                    <a href=""> | delete</a>
+                    <a href="/delete_post/{{ryan.post_id}}"> | delete</a>
                     {%endif%}
                 </div>
                 </div>

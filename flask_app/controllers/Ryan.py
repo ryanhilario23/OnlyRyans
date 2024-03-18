@@ -33,6 +33,7 @@ def save_ryan():
     id = Ryan.save_ryan(register_data)
     Accounts.create_account(id)
     session['user_id'] = id
+    session['full_name'] = id['first_name'] +' '+ id['last_name']
     return redirect ('/dashboard')
 
 
