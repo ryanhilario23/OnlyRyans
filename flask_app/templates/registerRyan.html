@@ -1,52 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Ryan</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
 
 </head>
-<body>
-    <header class="d-flex">
-        <div class="d-flex">
-                <h4 id="logo">Ryan</h4>
-                <p>Events</p>
-                <p>Merch</p>
-                <p>Poster</p>
-                <p>Gallery</p>
-                <p>Posters</p>
-                <p>Map</p>
-                <p>Press</p>
-                <p>Support</p>
-                <p>Contact</p>
-                <img id="iconLinks" src="static/icons/instagram_icon.png" alt="instagram Ryan MeetUp">
-                <img id="iconLinks" src="static/icons/meetup_icon.png" alt="Ryan Meetup Link">
-                <img id="iconLinks" src="static/icons/discord_icon.png" alt="Ryan Discord">
-        </div>
-        <button class="login-b"><a class="login-b" href="/">OnlyRyans</a></button>
-    </header>
 
-    <h1>Verify your Ryan name</h1>
-    {% with messages = get_flashed_messages(category_filter=["ryan_register"]) %}{%if messages %}
-    {%for message in messages%}
-    <p><strong>{{message}}</strong></p>
-    {%endfor%}
-    {%endif%}
-    {%endwith%}
-    <form action="/register_ryan_name/push" method= 'POST'>
-        <label for="">Your Ryan name: </label><br>
-        <input type="text" name="ryan_name"><br>
-        <label for="">Email:</label><br>
-        <input type="text" name="email"><br><br>
-        <input type="submit">
-    </form>
-    <div>
-        <p>Submit your Ryan name to be verified if your name is Ryan.</p>
-        <p>Your name has to phonetically sound like Ryan.</p>
-        <p>You'll get a message from Ryan Meet Up that you can register to OnlyRyans with your Ryan name.</p>
+<body>
+    <p id="banner">Who the hell is Patrick, anyway? Join us for St. Ryan's Day in Chicago IL, on March 23.</p>
+    <header class="d-flex navbar">
+        <stong id="logo">RYAN</stong>
+        <div class="d-flex">
+            <div class="d-flex menu-links">
+                <li>Events</li>
+                <li>Merch</li>
+                <li>Poster</li>
+                <li>Gallery</li>
+                <li>Posters</li>
+                <li>Map</li>
+                <li>Press</li>
+                <li>Support</li>
+                <li>Contact</li>
+                <div>
+                    <a href="https://www.instagram.com/ryanmeetup/">
+                        <img id="iconLinks" src="static/icons/instagram_icon.png" alt="instagram Ryan MeetUp">
+                    </a>
+                    <a href="https://www.meetup.com/ryanmeetup/">
+                        <img id="iconLinks" src="static/icons/meetup_icon.png" alt="Ryan Meetup Link">
+                    </a>
+                    <a href="https://discord.com/invite/HDugzYSHKC">
+                        <img id="iconLinks" src="static/icons/discord_icon.png" alt="Ryan Discord">
+                    </a>
+                </div>
+                <a class="button" href="/">OnlyRyans</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="content ">
+        <h3>Verify your Ryan name</h3>
+        <div class="d-flex ">
+            <div>
+            {% with messages = get_flashed_messages(category_filter=["ryan_register"]) %}{%if messages %}
+            {%for message in messages%}
+            <p><strong>{{message}}</strong></p>
+            {%endfor%}
+            {%endif%}
+            {%endwith%}
+            <form action="/register_ryan_name/push" method='POST'>
+                <label for="">Your Ryan name: </label><br>
+                <input type="text" name="ryan_name"><br>
+                <label for="">Email:</label><br>
+                <input type="text" name="email"><br><br>
+                <input type="submit">
+                <br>
+                <br>
+                <p>Submit your Ryan name to be verified if your name is Ryan.</p>
+                <p>Your name has to phonetically sound like Ryan.</p>
+                <p>You'll get a message from RyanMeetUp that you can register to OnlyRyans with your Ryan name.</p>
+            </div>
+        </div>
     </div>
+    </main>
 </body>
+<footer>
+</footer>
+
 </html>

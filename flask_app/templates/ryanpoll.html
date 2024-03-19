@@ -7,38 +7,42 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
 </head>
 
-<body>
-    <header class="d-flex">
-        <div>
-            <a href="/dashboard">OnlyRyans</a>
-            <p>Welcome {{session['full_name']}}</p>
-
-        </div>
+<body class="mx-auto">
+    <p id="banner">Who the hell is Patrick, anyway? Join us for St. Ryan's Day in Chicago IL, on March 23.</p>
+    <header class="d-flex navbar">
+        <a class="button" href="/dashboard">OnlyRyans</a>
+        <p>Welcome {{session['full_name']}}!</p>
         <div>
             <a href="/profile">Profile</a>
             <a href="/logout">logout</a>
         </div>
     </header>
-
-    <h4>Is this a Ryan?</h4>
-    {%if data%}
-    {%for datas in data%}
-    <div>
-        <h3>{{datas.name}}</h3>
-        
-        <form action="/cast_vote/push" method='POST'>
-            <input type="submit" name="vote" value='No'>
-            <input type="submit" name="vote" value='Yes'>
-            <input type="hidden" name="user_id" value="{{session['user_id']}}">
-            <input type="hidden" name="entry_id" value="{{datas.entry_id}}">
-            <p>No: {{datas.no}} | Yes:{{datas.yes}}</p>
-        </form>
-
-    </div>
-    {%endfor%}
-    {%endif%}
+    <main>
+        <div class="content ">
+            <h4 id="survey">Is this a Ryan?</h4>
+            {%if data%}
+            <div class="d-flex flex-nowrap form">
+                {%for datas in data%}
+                <form action="/cast_vote/push" method='POST' class="vote-box ">
+                    <h3>{{datas.name}}</h3>
+                    <div>
+                        <input type="submit" id='votebtn' name="vote" value='No'>
+                        <input type="submit" id='votebtn' name="vote" value='Yes'>
+                    </div>
+                    <input type="hidden" id='votebtn' name="user_id" value="{{session['user_id']}}">
+                    <input type="hidden" id='votebtn' name="entry_id" value="{{datas.entry_id}}">
+                    <p>No: {{datas.no}} | Yes:{{datas.yes}}</p>
+                </form>
+                {%endfor%}
+            </div>
+        </div>
+        {%endif%}
+    </main>
 </body>
+<footer>
+</footer>
 
 </html>

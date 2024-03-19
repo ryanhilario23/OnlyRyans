@@ -5,7 +5,7 @@ import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class Survey:
-    DB ='onlyryans_schema'
+    DB ='solo_project_schema'
     def __int__(self,data):
         self.entry = data['entry'] #amount of entries
         self.name = data['ryan_name']#The name to be questioned
@@ -24,11 +24,11 @@ class Survey:
     @classmethod
     def view_all_entry(cls):
         query = """ 
-                SELECT name, entrys.entry_id,
+                SELECT  entrys.entry_id, name,
                 COUNT(CASE WHEN vote = 'Yes' THEN 1 END) AS 'yes',
                 COUNT(CASE WHEN vote = 'No' THEN 1 END) AS 'no'
-                FROM vote
-                LEFT JOIN entrys ON entrys.entry_id = vote.entry_id
+                FROM entrys
+                LEFT JOIN vote ON entrys.entry_id = vote.entry_id
                 GROUP BY name,entrys.entry_id
                 """
         results = connectToMySQL(cls.DB).query_db(query)

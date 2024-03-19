@@ -5,7 +5,7 @@ import re
 
 
 class Accounts:
-    DB = 'onlyryans_schema'
+    DB = 'solo_project_schema'
     def __init__(self,data):
         self.user_id = data['user_id']
         self.facebook = data['facebook']

@@ -9,7 +9,7 @@ PASSWOR_REGEX = re.compile(r'a-zA-Z0-9.+_-')
 
 
 class Ryan:
-    DB = 'onlyryans_schema'
+    DB = 'solo_project_schema'
     def __init__(self,data):
         self.id = data['user_id']
         self.first_name = data['first_name']
@@ -91,7 +91,7 @@ class Ryan:
                 LIMIT 1;
                 """
         results = connectToMySQL(cls.DB).query_db(query,data)
-        if results == 1:
+        if not results == 1:
             flash('Valid Ryan names only. Register your ryan name to validate','register')
         return results
     
@@ -153,6 +153,8 @@ class Ryan:
                 """
         results = connectToMySQL(cls.DB).query_db(query)
         print(results)
+        if results == ():
+            return results
         post = cls(results[0])
         for ryan in results:
             ryans_post ={
@@ -172,8 +174,8 @@ class Ryan:
         query = """ 
                 SELECT users.user_id,users.first_name, users.last_name, COUNT(likes.user_id) AS like_count
                 FROM postings
-                LEFT JOIN likes ON likes.post_id = postings.post_id
-                LEFT JOIN users ON likes.user_id = users.user_id
+                JOIN likes ON likes.post_id = postings.post_id
+                JOIN users ON likes.user_id = users.user_id
                 WHERE postings.post_id = %(post_id)s
                 GROUP BY users.user_id, users.first_name, users.last_name;
                 """

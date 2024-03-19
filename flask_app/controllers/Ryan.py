@@ -15,9 +15,9 @@ def save_ryan():
     form = request.form
     if Ryan.brian_check(form):
         return redirect('/')
-    if not Ryan.validate_register(form):
-        return redirect('/')
     if not Ryan.ryan_name_check(form):
+        return redirect('/')
+    if not Ryan.validate_register(form):
         return redirect('/')
     if Ryan.registered_ryan(form):
         return redirect('/')
@@ -32,8 +32,9 @@ def save_ryan():
     }
     id = Ryan.save_ryan(register_data)
     Accounts.create_account(id)
+    account = Ryan.login_ryan(register_data)
     session['user_id'] = id
-    session['full_name'] = id['first_name'] +' '+ id['last_name']
+    session['full_name'] = account['first_name'] +' '+ account['last_name']
     return redirect ('/dashboard')
 
 

@@ -4,7 +4,7 @@ import re
 
 
 class Posting:
-    DB = 'onlyryans_schema'
+    DB = 'solo_project_schema'
     def __init__(self,data):
         self.post_id = data['post_id']
         self.post = data['post']
@@ -28,7 +28,7 @@ class Posting:
         query = """ 
                 SELECT post, first_name, last_name
                 FROM postings
-                LEFT JOIN users on postings.user_id = users.user_id
+                JOIN users on postings.user_id = users.user_id
                 WHERE postings.post_id = %(post_id)s
                 group by first_name, last_name
                 """

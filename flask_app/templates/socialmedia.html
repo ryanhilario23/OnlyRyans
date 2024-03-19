@@ -1,37 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add your social media</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
 
 </head>
-<body>
-    <header>
-        <a href="/dashboard">Home</a>
-        <a href="/logout">Logout</a>
+
+<body class="mx-auto">
+    <p id="banner">Who the hell is Patrick, anyway? Join us for St. Ryan's Day in Chicago IL, on March 23.</p>
+    <header class="d-flex navbar">
+        <a class="button" href="/dashboard">OnlyRyans</a>
+        <p>Welcome {{session['full_name']}}!</p>
+        <div>
+            <a href="/profile">Profile</a>
+            <a href="/logout">logout</a>
+        </div>
     </header>
-    <h3>add your account</h3>
-    <p>In development on adding more accounts</p>
-    <form action="/account/push" method="POST">
-        <label for="">Facebook:</label><br>
-        <input type="hidden" name='user_id' value= "{{session['user_id']}}">
-        <input type="text" name="facebook" value="{{accounts.facebook}}"> <br>
-        <label for="">Instagram:</label><br>
-        <input type="text" name="instagram" value="{{accounts.instagram}}"> <br>
-        <label for="">Snapchat:</label><br>
-        <input type="text" name="snapchat"  value="{{accounts.snapchat}}"> <br>
-        <label for="">Twitter / X:</label><br>
-        <input type="text" name="twitter" value="{{accounts.twitter}}"> <br>
-        <br>
-        <input type="submit" name='action' value="Cancel">
-        {%if accounts%}
-        <input type="submit" name='action' value="Update">
-        {%else%}
-        <input type="submit" name='action' value="Save">
-        {% endif %}
-    </form>
+
+    <main>
+        <div class="content ">
+            <h3>Add your accounts</h3>
+            <p>In development on adding more accounts</p>
+            <form action="/account/push" method="POST">
+                <label for="">Facebook:</label><br>
+                <input type="hidden" name='user_id' value="{{session['user_id']}}">
+                <input type="text" name="facebook" value="{{accounts.facebook}}"> <br>
+                <label for="">Instagram:</label><br>
+                <input type="text" name="instagram" value="{{accounts.instagram}}"> <br>
+                <label for="">Snapchat:</label><br>
+                <input type="text" name="snapchat" value="{{accounts.snapchat}}"> <br>
+                <label for="">Twitter / X:</label><br>
+                <input type="text" name="twitter" value="{{accounts.twitter}}"> <br>
+                <br>
+                <input type="submit" name='action' value="Cancel">
+                {%if accounts%}
+                <input type="submit" name='action' value="Update">
+                {%else%}
+                <input type="submit" name='action' value="Save">
+                {% endif %}
+            </form>
+        </div>
+    </main>
 </body>
+
 </html>

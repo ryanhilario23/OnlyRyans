@@ -11,36 +11,50 @@
 
 </head>
 
-<body>
-    <header>
-        <a href="/dashboard">Home</a>
-        <a href="/logout">Logout</a>
+<body class="mx-auto">
+    <p id="banner">Who the hell is Patrick, anyway? Join us for St. Ryan's Day in Chicago IL, on March 23.</p>
+    <header class="d-flex navbar">
+        <a class="button" href="/dashboard">OnlyRyans</a>
+        <p>Welcome {{session['full_name']}}!</p>
+        <div>
+            <a href="/profile">Profile</a>
+            <a href="/logout">logout</a>
+        </div>
     </header>
-    <h4>{{ryan.first_name}} {{ryan.last_name}}</h4>
-    {%if session['user_id'] == ryan.user_id %}
-    <a href="/accounts">Add your social media</a>
-    {%endif%}
+    <main>
+        <div class="content ">
+            <h4>{{ryan.first_name}} {{ryan.last_name}}</h4>
+            {%if session['user_id'] == ryan.user_id %}
+            <a href="/accounts">Add your social media</a>
+            {%endif%}
 
-    <p>{{ryan.first_name}} has posted: {{ryan.posts}}</p>
-    <p>{{ryan.first_name}} has liked: {{ryan.likes}}</p>
-    <h4>{{ryan.first_name}} {{ryan.last_name}}'s accounts</h4>
-    {%if not ryan.twitter ==''%}
-    <img id="iconLinks" src="static\icons\twitter_icon.png" alt="Twitter / X"> {{ryan.twitter}} <br>
-    {%endif%}
+            <br>
+            <p>{{ryan.first_name}} has posted: {{ryan.posts}}</p>
+            <p>{{ryan.first_name}} has liked: {{ryan.likes}}</p>
+            <br>
 
-    {%if not ryan.facebook ==''%}
-    <img id="iconLinks" src="static\icons\facebook_icon.png" alt="Facebook">{{ryan.facebook}} <br>
-    {%endif%}
+            <h4>{{ryan.first_name}} {{ryan.last_name}}'s accounts</h4>
+            {%if not ryan.twitter ==''%}
+            <img id="iconLinks" src="static\icons\twitter_icon.png" alt="Twitter / X"> {{ryan.twitter}} <br>
+            {%endif%}
 
-    {%if not ryan.instagram ==''%}
-    <img id="iconLinks" src="static\icons\instagram_icon.png" alt="Instagram icon"> {{ryan.instagram}} <br>
-    {%endif%}
+            {%if not ryan.facebook ==''%}
+            <img id="iconLinks" src="static\icons\facebook_icon.png" alt="Facebook"> {{ryan.facebook}} <br>
+            {%endif%}
 
-    {%if not ryan.snapchat == ''%}
-    <img id="iconLinks" src="static\icons\snapchat_icon.png" alt="Snapchat"> {{ryan.snapchat}} <br>
-    {%endif%}
+            {%if not ryan.instagram ==''%}
+            <img id="iconLinks" src="static\icons\instagram_icon.png" alt="Instagram icon"> {{ryan.instagram}} <br>
+            {%endif%}
 
-
+            {%if not ryan.snapchat == ''%}
+            <img id="iconLinks" src="static\icons\snapchat_icon.png" alt="Snapchat"> {{ryan.snapchat}} <br>
+            {%endif%}
+        </div>
+        <aside>
+        </aside>
+    </main>
 </body>
+<footer>
+</footer>
 
 </html>

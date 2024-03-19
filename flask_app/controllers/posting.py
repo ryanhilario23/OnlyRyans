@@ -7,6 +7,9 @@ from flask_app.models.Ryans import Ryan
 def onlyRyans_home():
     if not session:
         return redirect('/')
+    
+
+
     list = Ryan.show_all_post()
 
     print(session['full_name'])
@@ -25,7 +28,7 @@ def save_post():
 @app.route('/view/<int:user_id>')
 def see_ryan(user_id):
     user = Ryan.ryan_details(user_id)
-    return render_template('profile_copy.html',ryan=user)
+    return render_template('profile.html',ryan=user)
 
 @app.route('/likes_<int:post_id>')
 def ryan_like_this(post_id):
